@@ -5,11 +5,9 @@ const createFormikFieldsComparator = (fields: ReadonlyArray<string>) => (
   const compare = (type: PossibleFieldTypes) => (field: string) =>
     current[type][field] !== next[type][field];
 
-  return (
-    fields.some(compare('values')) ||
-    fields.some(compare('errors')) ||
-    fields.some(compare('touched'))
-  );
+  const test = (type: PossibleFieldTypes) => fields.some(compare(type));
+
+  return test('values') || test('errors') || test('touched');
 };
 
 export default createFormikFieldsComparator;
