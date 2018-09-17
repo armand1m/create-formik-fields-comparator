@@ -1,11 +1,16 @@
-sudo: false
 language: node_js
-node_js:
-  - 8
-  - 9
 cache:
   directories:
-  - "$HOME/.npm"
+    - ~/.npm
+notifications:
+  email: false
+node_js:
+  - '9'
+  - '8'
+  - '6'
+  - '4'
 after_success:
-  - npx nyc report --reporter=lcov | npx codecov
-  - npm run cov:check
+  - npm run travis-deploy-once "npm run semantic-release"
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
