@@ -13,3 +13,6 @@ cache:
 after_success:
   - npx nyc report --reporter=lcov | npx codecov
   - npm run cov:check
+  - npm run doc
+  - npm run doc:publish 
+  - npm run travis-deploy-once "npm run semantic-release"
