@@ -1,22 +1,32 @@
-# formik-fields-comparator
+# createFormikFieldsComparator
 
 Simple NPM module to help avoiding unnecessary re-renders in Formik form field components.
 
 Mainly inspired by this article: https://travix.io/using-recompose-hocs-to-get-better-performance-in-forms-using-formik-and-yup-e51024d645ba
 
+Sorry for the long name thou :smile: 
+
 ## Usage
 
-- First add it as a dependency:
 ```sh
-$ npm install formik-fields-comparator --save
+$ npm install create-formik-fields-comparator --save
 ```
 
 Then feel free to use it in the `shouldComponentUpdate` lifecycle of your form fieldset or field components.
 
 ```js
+import React from 'react';
+import createFormikFieldsComparator from 'create-formik-fields-comparator';
+
+/**
+ * Example MyComponent
+ * 
+ * This is a class based example of how you would
+ * use this utility inside your component lifecycle 
+ */
 export default class MyComponent extends React.Component {
     shouldComponentUpdate(prevProps, nextProps) {
-        const compare = createFormFieldsComparator(['email']);
+        const compare = createFormikFieldsComparator(['email']);
         return compare(prevProps, nextProps);
     }
 
@@ -35,11 +45,20 @@ export default class MyComponent extends React.Component {
 Or with `recompose`.
 
 ```js
+import React from 'react';
 import shouldUpdate from 'recompose/shouldUpdate';
-import createFormFieldsComparator from 'formik-fields-comparator';
+import createFormikFieldsComparator from 'create-formik-fields-comparator';
 
-const withOptimizations = shouldUpdate(createFormFieldsComparator(['email']));
-
+/**
+ * Example MyComponent
+ * 
+ * This is a stateless version
+ * of how you would use this utility
+ * inside your components.
+ * 
+ * Note how this component only
+ * cares about the `email` field.
+ */
 const MyComponent = ({
     values,
     onChange,
@@ -51,13 +70,17 @@ const MyComponent = ({
     />
 );
 
-export default withOptimizations(MyComponent);
+const enhance = shouldUpdate(createFormikFieldsComparator(['email']));
+
+export default enhance(MyComponent);
 ```
 
 ### Full Example with Recompose and Yup
 
+> **Disclaimer:** I made this thinking about its usage with libraries like [recompose](https://github.com/acdlite/recompose) or [proppy](https://github.com/fahad19/proppy). I would deeply use this in combination with one of these two libraries, or at least with plain higher-order components.
+
 ```js
-// FormSchema.js
+/** FormSchema.js */
 import object from 'yup/lib/object';
 import string from 'yup/lib/string';
 
@@ -72,9 +95,7 @@ export default object({
 /** EmailInput.js */
 import React, { Fragment } from 'react';
 import shouldUpdate from 'recompose/shouldUpdate';
-import createFormFieldsComparator from 'formik-fields-comparator';
-
-const withOptimizations = shouldUpdate(createFormFieldsComparator(['email']));
+import createFormikFieldsComparator from 'create-formik-fields-comparator';
 
 const EmailInput = ({
     values,
@@ -95,17 +116,18 @@ const EmailInput = ({
     </Fragment>
 );
 
-export default withOptimizations(EmailInput);
+const enhance = shouldUpdate(
+    createFormikFieldsComparator(['email'])
+);
+
+export default enhance(EmailInput);
 ```
 
 ```js
 /** SocialFieldset.js */
 import React, { Fragment } from 'react';
 import shouldUpdate from 'recompose/shouldUpdate';
-import createFormFieldsComparator from 'formik-fields-comparator';
-
-/** This component will only respond to changes in these keys when values, errors, or touched objects change */
-const withOptimizations = shouldUpdate(createFormFieldsComparator(['facebook', 'twitter']));
+import createFormikFieldsComparator from 'create-formik-fields-comparator';
 
 const SocialFieldset = ({
     values,
@@ -134,7 +156,11 @@ const SocialFieldset = ({
     </Fragment>
 );
 
-export default withOptimizations(SocialFieldset);
+const enhance = shouldUpdate(
+    createFormikFieldsComparator(['facebook', 'twitter'])
+);
+
+export default enhance(SocialFieldset);
 ```
 
 ```js
@@ -198,52 +224,12 @@ const enhance = withFormik({
         facebook: null,
         twitter: null
     }),
-    validationSchema: FormSchema;
+    validationSchema: FormSchema
 });
 
 export default enhance(Form);
 ```
 
+# Contributors
 
-### Example with a class component
-
-> **Disclaimer:** I made this thinking about its usage with libraries like [recompose](https://github.com/acdlite/recompose) or [proppy](https://github.com/fahad19/proppy). I would deeply use this in combination with one of these two libraries, or at least with plain higher-order components.
-
-```js
-import React, { Component, Fragment } from 'react';
-import createFormFieldsComparator from 'formik-fields-comparator';
-
-export default class EmailInput extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    shouldComponentUpdate(prevProps, nextProps) {
-        const compare = createFormFieldsComparator(['email']);
-        return compare(prevProps, nextProps);
-    }
-
-    render() {
-        const {
-            values,
-            errors,
-            touched,
-            onChange,
-            onBlur
-        } = this.props;
-
-        return (
-            <Fragment>
-                <input
-                    type="email"
-                    name="email"
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    value={values.email}
-                />
-                {errors.email && touched.email && <div>{errors.email}</div>}
-            </Fragment>
-        );
-    }
-} 
-```
+- Armando Magalhaes

@@ -1,1 +1,1 @@
-export * from './lib/create-form-fields-comparator';
+export * from './lib/create-formik-fields-comparator';

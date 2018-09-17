@@ -1,4 +1,4 @@
-const createFormFieldsComparator = (fields: ReadonlyArray<string>) => (
+const createFormikFieldsComparator = (fields: ReadonlyArray<string>) => (
   current: Props,
   next: Props
 ): boolean => {
@@ -12,4 +12,4 @@ const createFormFieldsComparator = (fields: ReadonlyArray<string>) => (
   );
 };
 
-export default createFormFieldsComparator;
+export default createFormikFieldsComparator;
