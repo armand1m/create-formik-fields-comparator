@@ -77,7 +77,7 @@ export default enhance(MyComponent);
 
 ### Full Example with Recompose and Yup
 
-> **Disclaimer:** I made this thinking about its usage with libraries like [recompose](https://github.com/acdlite/recompose) or [proppy](https://github.com/fahad19/proppy). I would deeply use this in combination with one of these two libraries, or at least with plain higher-order components.
+> **Disclaimer:** I made this thinking about its usage with libraries like [recompose](https://github.com/acdlite/recompose) or [proppy](https://github.com/fahad19/proppy). I would recommend to use this in combination with one of these two libraries, or at least with homemade higher order components.
 
 ```js
 /** FormSchema.js */
