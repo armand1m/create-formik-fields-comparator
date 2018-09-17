@@ -16,4 +16,4 @@ cache:
 after_success:
   - npx nyc report --reporter=lcov | npx codecov
   - npm run cov:check
-  - npm run travis-deploy-once "npm run semantic-release"
+  # - npm run travis-deploy-once "npm run semantic-release"
