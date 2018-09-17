@@ -1,6 +1,6 @@
 {
   "name": "create-formik-fields-comparator",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Simple utility to help avoiding unnecessary re-renders in Formik forms",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
