@@ -1,0 +1,3 @@
+var typedoc = typedoc || {};
+            typedoc.search = typedoc.search || {};
+            typedoc.search.data = {"kinds":{"64":"Function"},"rows":[{"id":0,"kind":64,"name":"createFormikFieldsComparator","url":"globals.html#createformikfieldscomparator","classes":"tsd-kind-function"},{"id":1,"kind":64,"name":"createFormikProps","url":"globals.html#createformikprops","classes":"tsd-kind-function tsd-is-not-exported"},{"id":2,"kind":64,"name":"runSuiteFor","url":"globals.html#runsuitefor","classes":"tsd-kind-function tsd-is-not-exported"}]};
