@@ -1,5 +1,7 @@
 # createFormikFieldsComparator
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/armand1m/create-formik-fields-comparator.svg)](https://greenkeeper.io/)
+
 Simple NPM module to help avoiding unnecessary re-renders in Formik form field components.
 
 Mainly inspired by this article: https://travix.io/using-recompose-hocs-to-get-better-performance-in-forms-using-formik-and-yup-e51024d645ba
